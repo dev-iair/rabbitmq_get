@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  admin:           
+    image: ubuntu:focal
+    stdin_open: true
+    tty: true 
+    networks:
+      network:
+        ipv4_address: 172.22.0.2
+    ports:
+      - "5671:5672"
+      - "15671:15672"
+    restart: always
+    volumes:
+      - /workspace:/workspace
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/24
+          gateway: 172.22.0.1
